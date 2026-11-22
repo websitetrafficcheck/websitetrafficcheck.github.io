@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Website Traffic Checker — Estimate Traffic & Learn How to Measure It</title><meta name="description" content="Estimate a domain's traffic as an illustrative range, and learn how to check real traffic with Google Analytics 4 and Search Console.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="canonical" href="https://websitetrafficcheck.github.io/">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#1e293b;background:#f1f5f9;line-height:1.65}
+a{color:#1d4ed8;text-decoration:none}a:hover{text-decoration:underline}
+header{background:#0f172a;color:#fff;padding:22px 20px}header .inner{max-width:1020px;margin:0 auto}
+header .brand{font-size:22px;font-weight:700}header .brand a{color:#fff}
+header nav{margin-top:10px;font-size:14px;display:flex;gap:18px;flex-wrap:wrap}header nav a{color:#bfdbfe}
+main{max-width:1020px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:30px;line-height:1.2;color:#0f172a;margin:0 0 12px}h2{font-size:22px;color:#0f172a;margin:32px 0 10px}h3{font-size:17px;color:#0f172a;margin:22px 0 8px}
+p{margin:0 0 14px}.lead{font-size:18px;color:#475569}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}.stat{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px}.stat b{font-size:24px;color:#0f172a;display:block}.stat span{font-size:13px;color:#64748b}
+@media(max-width:720px){.stats{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:14px 0}
+.toolbox{background:#fff;border:1px solid #cbd5e1;border-radius:12px;padding:24px}
+label{display:block;font-weight:600;margin:14px 0 6px;font-size:14px}
+input[type=text],input[type=number],textarea,select{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:8px;font-size:16px;font-family:inherit}
+button{background:#1d4ed8;color:#fff;border:0;padding:12px 20px;border-radius:8px;font-size:16px;cursor:pointer;margin-top:14px}
+button:hover{background:#1e40af}.muted{color:#64748b;font-size:14px}.small{font-size:13px;color:#64748b}
+.result{margin-top:18px;padding:16px;border-radius:8px;border:1px solid #e2e8f0;background:#f8fafc;white-space:pre-wrap;word-break:break-word}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.grid{grid-template-columns:1fr}h1{font-size:26px}}
+.article-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px;display:flex;gap:16px;margin:12px 0}
+.article-card img{width:120px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0}
+footer{background:#0f172a;color:#94a3b8;padding:24px 20px;text-align:center;font-size:14px}footer a{color:#bfdbfe}
+img.hero{width:100%;height:auto;border-radius:10px;margin:16px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff}td,th{border:1px solid #e2e8f0;padding:9px;text-align:left;font-size:14px}
+.note{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:18px 0;font-size:14px}
+.bar{height:14px;background:#1d4ed8;border-radius:4px;margin:4px 0}
+</style></head>
+<body><header><div class="inner"><div class="brand"><a href="/">Website Traffic Checker</a></div>
+<p style="margin:6px 0 0;color:#94a3b8">Estimate traffic, check domains, and learn how real traffic is measured.</p>
+<nav><a href="/">Home</a><a href="/tools/domain-age-checker.html">Domain Age</a><a href="/tools/seo-meta-checker.html">SEO Meta Checker</a><a href="/tools/traffic-growth-calculator.html">Growth Calculator</a><a href="/tools/competitor-compare.html">Competitor Compare</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav></div></header>
+<main>
+<h1>Website Traffic Checker</h1>
+<p class="lead">Enter a domain to see an illustrative traffic estimate — clearly labelled as an estimate, with the method explained — plus the tools to check traffic properly.</p>
+<div class="stats">
+<div class="stat"><b>5</b><span>Free tools on this site</span></div>
+<div class="stat"><b>20</b><span>Original traffic &amp; SEO guides</span></div>
+<div class="stat"><b>2</b><span>Free sources for real data: GA4 + Search Console</span></div>
+<div class="stat"><b>0</b><span>Exact numbers claimed — estimates only</span></div>
+</div>
+<div class="note"><strong>This is an ESTIMATE and a guide — NOT real SimilarWeb data.</strong> Nobody can see another site's exact traffic except its owner. The figure below is an illustrative range produced from the domain name itself, so you can see the scale an estimator works at. For real numbers, use Google Analytics 4 and Google Search Console on your own site. For a competitor, compare estimates across several tools and treat the range, not any single number, as the answer.</div>
+<div class="toolbox">
+<label for="d">Domain</label>
+<input type="text" id="d" placeholder="example.com">
+<button onclick="est()">Estimate traffic</button>
+<div id="out" class="result" style="display:none"></div>
+<p class="small">Method (illustrative only): a deterministic hash of the domain name produces a scale factor, combined with the length of the name and its top-level domain, to place the site in a broad band. The result is a range, not a measurement. It uses no browsing data, no panel, and no search data — which is exactly why it must never be quoted as real traffic.</p>
+</div>
+<script>
+function hash(s){let h=0;for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))>>>0;}return h;}
+function fmt(n){return n.toLocaleString('en-US');}
+function est(){
+ const raw=document.getElementById('d').value.trim().toLowerCase().replace(/^https?:\/\//,'').split('/')[0];
+ const out=document.getElementById('out');out.style.display='block';
+ if(!raw||!raw.includes('.')){out.textContent='Enter a domain such as example.com.';return;}
+ const h=hash(raw);const band=h%5;
+ const bands=[[200,800],[800,3000],[3000,12000],[12000,50000],[50000,200000]];
+ const lo=bands[band][0],hi=bands[band][1];
+ const tld=raw.split('.').pop();
+ const note=tld==='com'? 'A .com domain is the commonest commercial ending; this says nothing about the site’s actual traffic.': 'The top-level domain does not determine traffic; it is used here only as part of the illustrative calculation.';
+ out.textContent='ILLUSTRATIVE ESTIMATE for '+raw+' — NOT real data\n\nEstimated monthly visits: '+fmt(lo)+' – '+fmt(hi)+'\nEstimated daily visits: '+fmt(Math.round(lo/30))+' – '+fmt(Math.round(hi/30))+'\n\nHow to read this: the range is wide on purpose. A real estimator would narrow it with search and panel data, but it would still be an estimate.\n'+note+'\n\nHow to check traffic properly:\n1. Your own site: install Google Analytics 4 and Google Search Console — both free — and read actual users and clicks.\n2. A competitor: run the domain through SimilarWeb, Semrush, or Ahrefs, compare the ranges, and look at the trend over months.';
+}
+</script>
+<h2>Other tools</h2>
+<div class="grid">
+<div class="card"><h3><a href="/tools/domain-age-checker.html">Domain Age Checker</a></h3><p>Find when a domain was created using public RDAP data, with its limits explained.</p></div>
+<div class="card"><h3><a href="/tools/seo-meta-checker.html">SEO Meta Checker</a></h3><p>Paste a title and meta description and check length, keywords, and readability.</p></div>
+<div class="card"><h3><a href="/tools/traffic-growth-calculator.html">Traffic Growth Calculator</a></h3><p>Project future traffic from a starting value and a monthly growth rate.</p></div>
+<div class="card"><h3><a href="/tools/competitor-compare.html">Competitor Compare Worksheet</a></h3><p>A structured table to compare your site with competitors — your own notes, not real data.</p></div>
+</div>
+<h2>Guides</h2>
+<div class="article-card"><img src="/images/how-to-check-website-traffic.jpg" alt="Analytics dashboard on a laptop showing website traffic graphs" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/how-to-check-website-traffic.html">How to Check Website Traffic: The Honest Guide</a></h3><p class="muted" style="margin:0">Learn how to check website traffic properly — your own with Analytics and Search Console, and a competitor's with estimation tools — and what each method can and cannot tell you.</p></div></div>
+<div class="article-card"><img src="/images/similarweb-alternatives.jpg" alt="Comparison of website analytics tools on a desk with charts" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/similarweb-alternatives.html">SimilarWeb Alternatives: 7 Ways to Estimate Competitor Traffic</a></h3><p class="muted" style="margin:0">SimilarWeb is not the only way to estimate a competitor's traffic. Compare seven alternatives — free and paid — and learn when each one is useful.</p></div></div>
+<div class="article-card"><img src="/images/google-analytics-setup-guide.jpg" alt="Person setting up Google Analytics on a computer screen" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/google-analytics-setup-guide.html">Google Analytics 4 Setup Guide for Beginners</a></h3><p class="muted" style="margin:0">Set up Google Analytics 4 on your website step by step: create the property, install the tag, check that data is arriving, and learn the first reports to read.</p></div></div>
+<div class="article-card"><img src="/images/understanding-traffic-sources.jpg" alt="Road signs pointing to search, social media, direct and referral traffic sources" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/understanding-traffic-sources.html">Understanding Website Traffic Sources: Search, Social, Direct, and Referral</a></h3><p class="muted" style="margin:0">Traffic sources explain where visitors come from and what they want. Learn the four main sources, how Analytics classifies them, and what a healthy mix looks like.</p></div></div>
+<div class="article-card"><img src="/images/how-to-grow-website-traffic.jpg" alt="Plant growing from a laptop keyboard symbolising website traffic growth" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/how-to-grow-website-traffic.html">How to Grow Website Traffic: A Practical Plan That Works</a></h3><p class="muted" style="margin:0">Growing traffic takes a plan, not tricks. Follow a practical sequence: fix the basics, publish useful content, earn links, and measure what works.</p></div></div>
+<div class="article-card"><img src="/images/organic-traffic-explained.jpg" alt="Green leaves growing over a search bar symbolising organic traffic" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/organic-traffic-explained.html">Organic Traffic Explained: What It Is and Why It Matters Most</a></h3><p class="muted" style="margin:0">Organic traffic is visitors from unpaid search results. Learn why it is the most valuable traffic for most sites, how it is earned, and how to grow it.</p></div></div>
+<div class="article-card"><img src="/images/direct-vs-referral-traffic.jpg" alt="Two roads merging into one, direct and referral traffic concept" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/direct-vs-referral-traffic.html">Direct vs Referral Traffic: What Each One Tells You About Your Site</a></h3><p class="muted" style="margin:0">Direct traffic and referral traffic look similar in a report but mean different things. Learn how Analytics classifies them and what each reveals.</p></div></div>
+<div class="article-card"><img src="/images/bounce-rate-explained.jpg" alt="Visitor leaving a website quickly, bounce rate concept photo" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/bounce-rate-explained.html">Bounce Rate Explained: What It Means in Google Analytics 4</a></h3><p class="muted" style="margin:0">Bounce rate changed in Google Analytics 4. Learn what it means now, what a good rate looks like, and when a high bounce rate is actually fine.</p></div></div>
+<div class="article-card"><img src="/images/keyword-traffic-analysis.jpg" alt="Keyword research spreadsheet with search terms and traffic data" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/keyword-traffic-analysis.html">Keyword Traffic Analysis: Find the Searches That Bring You Visitors</a></h3><p class="muted" style="margin:0">Keyword analysis connects search queries to visits. Learn how to find the keywords that bring you traffic, spot opportunities, and prioritise content.</p></div></div>
+<div class="article-card"><img src="/images/traffic-vs-conversions.jpg" alt="Funnel diagram showing website visitors turning into customers" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/traffic-vs-conversions.html">Traffic vs Conversions: Why More Visitors Is Not Always Better</a></h3><p class="muted" style="margin:0">Traffic is only useful if it leads somewhere. Learn the difference between visits and conversions, why targeting matters more than volume, and how to balance both.</p></div></div>
+<div class="article-card"><img src="/images/free-traffic-checker-tools.jpg" alt="Free online tools on a laptop screen with traffic charts" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/free-traffic-checker-tools.html">Free Traffic Checker Tools: What They Can and Cannot Tell You</a></h3><p class="muted" style="margin:0">Free traffic checkers are useful if you know their limits. Compare what free tools offer, how their estimates are made, and how to use them without being misled.</p></div></div>
+<div class="article-card"><img src="/images/competitor-traffic-analysis.jpg" alt="Two business rivals analysing charts and website data" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/competitor-traffic-analysis.html">Competitor Traffic Analysis: Learn from Rivals Without Copying Them</a></h3><p class="muted" style="margin:0">Analyse a competitor's traffic to learn what works in your niche: which pages attract visitors, which sources they rely on, and where the gaps are.</p></div></div>
+<div class="article-card"><img src="/images/social-media-traffic-guide.jpg" alt="Smartphone showing social media apps with website traffic flowing" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/social-media-traffic-guide.html">Social Media Traffic: How to Turn Followers into Website Visitors</a></h3><p class="muted" style="margin:0">Social media can send real traffic, but only if you treat it as distribution, not as a home. Learn what works, what does not, and how to measure it.</p></div></div>
+<div class="article-card"><img src="/images/search-console-traffic-guide.jpg" alt="Google Search Console performance report on a monitor" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/search-console-traffic-guide.html">Google Search Console Traffic Guide: Read Clicks, Impressions, and Queries</a></h3><p class="muted" style="margin:0">Search Console shows how Google sees your site. Learn to read the performance report, find opportunities, and fix the pages that appear but are never clicked.</p></div></div>
+<div class="article-card"><img src="/images/improving-page-views.jpg" alt="Reader browsing multiple articles on a website" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/improving-page-views.html">Improving Page Views: Get Visitors to Read More of Your Site</a></h3><p class="muted" style="margin:0">Page views grow when visitors stay and explore. Learn how internal linking, related content, and clear next steps turn one visit into several page views.</p></div></div>
+<div class="article-card"><img src="/images/traffic-estimation-methods.jpg" alt="Data scientist reviewing estimation models and charts" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/traffic-estimation-methods.html">How Website Traffic Is Estimated: Methods, Models, and Margins of Error</a></h3><p class="muted" style="margin:0">Traffic estimates come from models, not measurements. Learn the main estimation methods, why they disagree, and how wide the margin of error really is.</p></div></div>
+<div class="article-card"><img src="/images/seasonal-traffic-patterns.jpg" alt="Calendar with seasonal peaks and troughs in website traffic" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/seasonal-traffic-patterns.html">Seasonal Website Traffic Patterns: Plan for Peaks and Slumps</a></h3><p class="muted" style="margin:0">Traffic rises and falls with seasons, holidays, and school terms. Learn to recognise your site's seasonal pattern and plan content and promotions around it.</p></div></div>
+<div class="article-card"><img src="/images/local-seo-traffic.jpg" alt="Local shop with customers finding it on a phone map" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/local-seo-traffic.html">Local SEO Traffic: How Small Businesses Get Found Nearby</a></h3><p class="muted" style="margin:0">Local search brings customers who are nearby and ready to act. Learn how Google Business Profile, reviews, and local pages drive local traffic.</p></div></div>
+<div class="article-card"><img src="/images/content-marketing-traffic.jpg" alt="Writer creating blog content that attracts website visitors" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/content-marketing-traffic.html">Content Marketing Traffic: Turn Articles into a Steady Audience</a></h3><p class="muted" style="margin:0">Content marketing grows traffic by being useful. Learn how to choose topics, write articles people share, and turn readers into subscribers and customers.</p></div></div>
+<div class="article-card"><img src="/images/measuring-traffic-growth.jpg" alt="Growth chart with upward trend and measurement tools" loading="lazy"><div><h3 style="margin:0 0 6px"><a href="/guides/measuring-traffic-growth.html">Measuring Traffic Growth: The Metrics That Actually Matter</a></h3><p class="muted" style="margin:0">Growth is more than a bigger number. Learn which metrics show real progress, how to set a baseline, and how to report growth honestly.</p></div></div>
+</main>
+<footer><p>Website Traffic Checker &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/disclaimer.html">Disclaimer</a> &middot; <a href="/about.html">About</a> &middot; <a href="/contact.html">Contact</a></p><p class="small">Estimates on this site are illustrative guides, not real traffic data.</p></footer></body></html>
