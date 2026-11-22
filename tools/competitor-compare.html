@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Competitor Compare Worksheet | Website Traffic Checker</title><meta name="description" content="Compare your website with competitors in a structured table you fill in yourself. Your own notes — not real traffic data.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="canonical" href="https://websitetrafficcheck.github.io/tools/competitor-compare.html">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#1e293b;background:#f1f5f9;line-height:1.65}
+a{color:#1d4ed8;text-decoration:none}a:hover{text-decoration:underline}
+header{background:#0f172a;color:#fff;padding:22px 20px}header .inner{max-width:1020px;margin:0 auto}
+header .brand{font-size:22px;font-weight:700}header .brand a{color:#fff}
+header nav{margin-top:10px;font-size:14px;display:flex;gap:18px;flex-wrap:wrap}header nav a{color:#bfdbfe}
+main{max-width:1020px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:30px;line-height:1.2;color:#0f172a;margin:0 0 12px}h2{font-size:22px;color:#0f172a;margin:32px 0 10px}h3{font-size:17px;color:#0f172a;margin:22px 0 8px}
+p{margin:0 0 14px}.lead{font-size:18px;color:#475569}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}.stat{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px}.stat b{font-size:24px;color:#0f172a;display:block}.stat span{font-size:13px;color:#64748b}
+@media(max-width:720px){.stats{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:14px 0}
+.toolbox{background:#fff;border:1px solid #cbd5e1;border-radius:12px;padding:24px}
+label{display:block;font-weight:600;margin:14px 0 6px;font-size:14px}
+input[type=text],input[type=number],textarea,select{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:8px;font-size:16px;font-family:inherit}
+button{background:#1d4ed8;color:#fff;border:0;padding:12px 20px;border-radius:8px;font-size:16px;cursor:pointer;margin-top:14px}
+button:hover{background:#1e40af}.muted{color:#64748b;font-size:14px}.small{font-size:13px;color:#64748b}
+.result{margin-top:18px;padding:16px;border-radius:8px;border:1px solid #e2e8f0;background:#f8fafc;white-space:pre-wrap;word-break:break-word}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.grid{grid-template-columns:1fr}h1{font-size:26px}}
+.article-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px;display:flex;gap:16px;margin:12px 0}
+.article-card img{width:120px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0}
+footer{background:#0f172a;color:#94a3b8;padding:24px 20px;text-align:center;font-size:14px}footer a{color:#bfdbfe}
+img.hero{width:100%;height:auto;border-radius:10px;margin:16px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff}td,th{border:1px solid #e2e8f0;padding:9px;text-align:left;font-size:14px}
+.note{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:18px 0;font-size:14px}
+.bar{height:14px;background:#1d4ed8;border-radius:4px;margin:4px 0}
+</style></head>
+<body><header><div class="inner"><div class="brand"><a href="/">Website Traffic Checker</a></div>
+<p style="margin:6px 0 0;color:#94a3b8">Estimate traffic, check domains, and learn how real traffic is measured.</p>
+<nav><a href="/">Home</a><a href="/tools/domain-age-checker.html">Domain Age</a><a href="/tools/seo-meta-checker.html">SEO Meta Checker</a><a href="/tools/traffic-growth-calculator.html">Growth Calculator</a><a href="/tools/competitor-compare.html">Competitor Compare</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav></div></header>
+<main><h1>Competitor Compare Worksheet</h1><p class='lead'>Compare your site with up to three competitors. This is a worksheet you fill in from your own research — it contains no real traffic data and it does not fetch any.</p><div class='note'>Be honest in the scores: they are your judgement from visible signals (publishing frequency, search visibility, engagement), not measurements. Use the worksheet to find gaps, not to copy a rival.</div><div class='toolbox'><table><tr><th></th><th>Your site</th><th>Competitor 1</th><th>Competitor 2</th></tr><tr><td>Domain</td><td><input type='text' id='c0'></td><td><input type='text' id='c1'></td><td><input type='text' id='c2'></td></tr><tr><td>Main topics (1–5)</td><td><input type='number' id='t0' min='1' max='5'></td><td><input type='number' id='t1' min='1' max='5'></td><td><input type='number' id='t2' min='1' max='5'></td></tr><tr><td>Content quality (1–5)</td><td><input type='number' id='q0' min='1' max='5'></td><td><input type='number' id='q1' min='1' max='5'></td><td><input type='number' id='q2' min='1' max='5'></td></tr><tr><td>Search visibility (1–5)</td><td><input type='number' id='v0' min='1' max='5'></td><td><input type='number' id='v1' min='1' max='5'></td><td><input type='number' id='v2' min='1' max='5'></td></tr><tr><td>Publishing frequency (1–5)</td><td><input type='number' id='f0' min='1' max='5'></td><td><input type='number' id='f1' min='1' max='5'></td><td><input type='number' id='f2' min='1' max='5'></td></tr></table><label for='gap'>Biggest gap you can fill</label><textarea id='gap' rows='3' placeholder='e.g. Nobody covers beginner guides for…'></textarea><button onclick='go()'>Compare</button><div id='o' class='result' style='display:none'></div></div><script>function go(){const names=[0,1,2].map(i=>document.getElementById('c'+i).value.trim()||('Site '+(i+1)));const scores=[0,1,2].map(i=>['t','q','v','f'].reduce((a,k)=>a+(parseFloat(document.getElementById(k+i).value)||0),0));const o=document.getElementById('o');o.style.display='block';o.textContent='Totals (out of 20, your own scores):\n'+names.map((n,i)=>n+': '+scores[i]).join('\n')+'\n\nGap to fill: '+(document.getElementById('gap').value.trim()||'(not noted yet)')+'\n\nNext step: pick the lowest-scoring area for your own site and improve one thing there this week.';}</script><p><a href='/guides/competitor-traffic-analysis.html'>How to analyse competitors</a> &middot; <a href='/'>Back home</a></p></main>
+<footer><p>Website Traffic Checker &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/disclaimer.html">Disclaimer</a> &middot; <a href="/about.html">About</a> &middot; <a href="/contact.html">Contact</a></p><p class="small">Estimates on this site are illustrative guides, not real traffic data.</p></footer></body></html>
